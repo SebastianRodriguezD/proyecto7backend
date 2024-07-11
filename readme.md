@@ -1,124 +1,135 @@
-PROYECTO 6 API REST
+# Proyecto 7 Backend
 
-En este proyecto, ponemos en practica lo aprendido en la sección de backend en el curso de ROCK THE CODE. Aplicamos los conococimientos adquiridos en:
+Este repositorio contiene el código del backend desarrollado para el Proyecto 7. Este proyecto es parte de un curso de desarrollo web y utiliza tecnologías como Node.js, Express.js y MongoDB para implementar una API RESTful que gestiona usuarios, libros y librerías, y ofrece autenticación basada en tokens JWT (JSON Web Tokens).
 
--como crear una estrucura ideal para un proyecto backend
--la utilización correcta de la librería de express para crear esta API.
--la creación, conexión y utilización de una BBDD utilizando moongose.
+## Descripción del Proyecto
 
-- y el uso correcto de los modelos, controladores y rutas.
+El Proyecto 7 Backend implementa un servidor Node.js que proporciona una API RESTful para la gestión de usuarios, libros y librerías. Incluye endpoints para registrar y autenticar usuarios, así como para crear, actualizar y eliminar libros y librerías.
 
-Hemos hecho una simulación de un concesionario, para eso hemos creado una colección de coches y otra relacionada si el coche se han vendido o no.
+## Estructura del Repositorio
 
-Requisitos previos
+El repositorio está estructurado de la siguiente manera:
 
-Lo primero que haremos para iniciar el proyecto backend es crear un servidor con la librería express.
+- **`src/`**: Directorio principal que contiene el código fuente del proyecto.
+  - **`controllers/`**: Controladores que manejan las solicitudes HTTP y gestionan la lógica de negocio.
+    - `authController.js`: Controlador para la autenticación de usuarios.
+    - `user.js`: Controlador para la gestión de usuarios.
+    - `libros.js`: Controlador para la gestión de libros.
+    - `librerias.js`: Controlador para la gestión de librerías.
+  - **`middlewares/`**: Middlewares utilizados en la aplicación.
+    - `authMiddleware.js`: Middleware para la verificación del token JWT y la autenticación.
+  - **`models/`**: Modelos de datos de la aplicación.
+    - `user.js`: Definición del esquema de usuario para interactuar con la base de datos MongoDB.
+    - `libros.js`: Definición del esquema de libro para interactuar con la base de datos MongoDB.
+    - `librerias.js`: Definición del esquema de librería para interactuar con la base de datos MongoDB.
+  - **`routes/`**: Definición de las rutas de la API.
+    - `authRoutes.js`: Rutas relacionadas con la autenticación de usuarios.
+    - `user.js`: Rutas relacionadas con la gestión de usuarios.
+    - `libros.js`: Rutas relacionadas con la gestión de libros.
+    - `librerias.js`: Rutas relacionadas con la gestión de librerías.
+  - **`config/`**: Configuraciones del proyecto.
+    - `config.js`: Configuración del servidor y de la base de datos MongoDB.
+    - `jwt.js`: Configuración para la generación y verificación de tokens JWT.
+  - **`index.js`**: Punto de entrada de la aplicación Node.js.
 
-- Ejecutamos npm init -y para crear nuestros package.json
-- Instalamos la Libreira npm i -D nodemon
-- Cambiamos el nombre del script start a “node index.js” y agregamos el script “dev”: “nodemon index.js”
-- Instalamos la Liberia npm i express
-- Requerimos express const express = require (“express”)
-- Const app = express()
-- Const PORT = 3000
-- app.use('/', router)
-- app.listen(PORT, () => {
-- console.log(`Servidor conectado en http://localhost:${PORT}`)
-- })
+## Tecnologías Utilizadas
 
-CREAR UN BASE DE DATOS
-• Abrir mongo atlas y crear la base de datos, generar credenciales y contraseña y guardar en un archivo .env (ejecutar el comando npm i dotenv -D)
-• IP 0.0.0.0/0 IP GLOBLAL, Add Entry
-• Connect -> Drivers -> copiar el enlace y pegarlo en el archivo .env
-• Cambiar la contraseña quitando las flechas y guardarlo en una variable de entorno
-Llamada así “DB_URL”
+- Node.js
+- Express.js
+- MongoDB (con Mongoose para la capa de abstracción de datos)
+- JSON Web Tokens (JWT)
 
-CONECTARME A UNA BASE DE DATOS
+## Instrucciones para Clonar y Ejecutar el Proyecto
 
-• Src -> api -> config -> middlewares –> utils
-• Config -> db.js
-• Instalar la librería mongoose con el comando npm i mongoose (se realiza todo lo que tenga que ver con la base de datos).
-• En el archivo db.js requerimos mongoose
+Para clonar este repositorio y ejecutar el proyecto en tu máquina local, sigue estos pasos:
 
-Nos traemos el módulo mongoose
+1. Clona el repositorio utilizando Git:
 
-- creamos una función asíncrona llamada como queramos, en este caso connectDB
-- creamos un bloque trycatch ya que algo podría fallar y así lo controlamos
-- usamos await porque el proceso de conectarse será asíncrono y utilizamos el método connect de mongoose el cual le aportamos la url de la BBDD que la cogemos desde el .env
-- exportamos la función para poder usarla en el index.js
-- Instalamos la Liberia npm i dotenv permite acceder a nuestras variables de entorno (se debería siempre confirgurar en la línea 1 de nuetsro index.js)
+   ```bash
+   git clone https://github.com/SebastianRodriguezD/proyecto7backend.git
+   ```
 
-FUNCIONES DE LOS ENDPOINTS
+2. Navega al directorio del proyecto:
 
-EN MODELOS:
+   ```bash
+   cd proyecto7backend
+   ```
 
-1. El modelo de los coches que irán en nuestra BBDD. no se podrán duplicar si ya están en la base de datos.
-2. El modelo de las ventas que se relaciona con cada coche e indica si esta vendido o no y en que año.
+3. Instala las dependencias del proyecto:
 
-EN CONTROLADORES:
+   ```bash
+   npm install
+   ```
 
-1. coches.js
+4. Configura las variables de entorno necesarias, como la conexión a la base de datos MongoDB y la configuración del token JWT, en el archivo `config.js`.
 
-Tenemos un CRUD completo para poder, publicar, actualizar, eliminar o requerir un coche.
+5. Ejecuta la aplicación:
 
-getCoches: Busca todos los coches disponibles que hay en nuestra BBDD.
-postCoches: Publica un nuevo coche sino esta en la BBDD.
-deleteCoches: Elimina un coche si está en la BBDD
-updateCoches: Actualiza alguna información o dato que esté en la BBDD
+   ```bash
+   npm start
+   ```
 
-2. ventas.js
+6. La aplicación estará disponible en `http://localhost:3000` por defecto.
 
-Tenemos un CRUD completo para poder, publicar, actualizar, eliminar o requerir una venta.
+## Endpoints de la API
 
-getVentas: Busca todas las ventas que se han realizado o que no se han realizado de los coches.
-getVentasId: Busca un coche por ID y verifica si se ha vendido o no.
-postVentas: publica una nueva venta.
-updateVentas: actualiza una venta:
-deleteVentas: Elimina una Venta.
+### Usuarios
 
-EN RUTAS
+- **Registro de Usuario:**
 
-1. coches.js
-   Importamos las funciones CRUD de coches. le añadimos el metodo de rutas de express y le damos una dirección con sus metodos HTTP correspondiente:
+  - `POST /api/auth/register`
+    - Crea un nuevo usuario en la base de datos.
 
-- cochesRoutes.get('/', getCoches)
-- cochesRoutes.post('/', postCoches)
-- cochesRoutes.delete('/:id', deleteCoches)
-- cochesRoutes.put('/:id', updateCoches)
+- **Inicio de Sesión:**
+  - `POST /api/auth/login`
+    - Inicia sesión y genera un token JWT válido.
 
-2. ventas.js
-   Importamos las funciones CRUD de ventas. le añadimos el metodo de rutas de express y le damos una dirección con sus metodos HTTP correspondiente:
+### Libros
 
-ventasRoutes.get('/:id', getVentasId)
-ventasRoutes.get('/', getVentas)
-ventasRoutes.post('/', postVentas)
-ventasRoutes.delete('/:id', deleteVentas)
-ventasRoutes.put('/:id', updateVentas)
+- **Listar Libros:**
 
-En nuestro index.js deberíamos tener lo siguiente para nuestro servidor funcione correctamente:
+  - `GET /api/libros`
+    - Obtiene todos los libros almacenados.
 
-- la configuración del dotenv, que nos permitira leer los archivos .env
-- requerimos: express, la función de la conexión a la BBDD, y las rutas que hemos creado.
+- **Crear Libro:**
 
-const app = express()
-connectDB()
-app.use(express.json())
+  - `POST /api/libros`
+    - Crea un nuevo libro en la base de datos.
 
-app.use('/api/v1/coches', cochesRoutes)
-app.use('/api/v1/ventas', ventasRoutes)
+- **Actualizar Libro:**
 
-app.use('/ping', (req, res, next) => {
-res.status(202).json('pong')
-})
+  - `PUT /api/libros/:id`
+    - Actualiza la información de un libro específico.
 
-app.use('\*', (req, res, next) => {
-return res.status(404).json('Route not found')
-})
+- **Eliminar Libro:**
+  - `DELETE /api/libros/:id`
+    - Elimina un libro específico de la base de datos.
 
-app.listen(3000, () => {
-console.log('Servidor levantado en: http://localhost:3000')
-})
+### Librerías
 
-de esta manera tendríamos nuestro proyecto levantado y andando correctamente.
+- **Listar Librerías:**
 
-Gracias, Sebastian Rodriguez.
+  - `GET /api/librerias`
+    - Obtiene todas las librerías almacenadas.
+
+- **Crear Librería:**
+
+  - `POST /api/librerias`
+    - Crea una nueva librería en la base de datos.
+
+- **Actualizar Librería:**
+
+  - `PUT /api/librerias/:id`
+    - Actualiza la información de una librería específica.
+
+- **Eliminar Librería:**
+  - `DELETE /api/librerias/:id`
+    - Elimina una librería específica de la base de datos.
+
+## Notas Adicionales
+
+- Asegúrate de tener Node.js y npm instalados en tu sistema antes de comenzar.
+- Revisa los archivos de configuración y ajusta según sea necesario para tu entorno de desarrollo.
+- Para más detalles sobre el código y su funcionamiento, revisa los comentarios dentro de los archivos fuente en el repositorio.
+
+Gracias

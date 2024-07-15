@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const libros = require('../../api/models/libros')
-const coches = require('../../data/libros')
 
 mongoose
   .connect(
@@ -15,7 +14,7 @@ mongoose
   })
   .catch((err) => console.log(`Error deleting data: ${err}`))
   .then(async () => {
-    await Coches.insertMany(coches)
+    await libros.insertMany(libros)
     console.log('libros Introducidos')
   })
   .catch((err) => console.log(`Error creating data: ${err}`))
